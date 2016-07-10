@@ -1,0 +1,32 @@
+version: '2'
+services:
+  nginx:
+    image: packageman/nginx:1.0.0
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/src
+      - ./nginx/conf:/etc/nginx/conf.d
+    links:
+      - php
+      - redis
+      - mongodb
+  php:
+    image: packageman/php:1.0.0
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src:/src
+  redis:
+    image: packageman/redis:1.0.0
+    ports:
+      - "6379:6379"
+  mongodb:
+    image: packageman/mongodb:1.0.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/var/lib/mongodb
+volumes:
+  mongodb-data:
+    driver: local
