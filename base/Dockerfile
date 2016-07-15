@@ -1,5 +1,5 @@
-FROM phusion/baseimage:0.9.19
-# Base images: ubuntu 16.04
+FROM phusion/baseimage:0.9.18
+# Base images: ubuntu 14.04
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
 ENV HOME /root
