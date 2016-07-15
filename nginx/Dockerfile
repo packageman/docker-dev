@@ -2,7 +2,8 @@ FROM packageman/base:1.0.0
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+RUN apt-get update \
+ && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
         python-software-properties --no-install-recommends \
  && add-apt-repository ppa:nginx/stable \
  && apt-get update \
