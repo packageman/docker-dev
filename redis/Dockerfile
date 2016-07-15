@@ -2,7 +2,13 @@ FROM packageman/base:1.0.0
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
-RUN apt-get update && apt-get install -y redis-server --no-install-recommends
+RUN apt-get update \
+ && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+        python-software-properties --no-install-recommends \
+ && add-apt-repository ppa:chris-lea/redis-server \
+ && apt-get update \
+ && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+        redis-server --no-install-recommends
 
 RUN sed 's/^daemonize yes/daemonize no/' -i /etc/redis/redis.conf \
  && sed 's/^bind 127.0.0.1/bind 0.0.0.0/' -i /etc/redis/redis.conf \
