@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.9.19
-
 # Base images: ubuntu 16.04
+MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
 ENV HOME /root
 ENV REFRESHED_AT 2016-07-15

@@ -1,10 +1,9 @@
-FROM phusion/baseimage:0.9.18
+FROM packageman/base:1.0.0
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
-CMD ["/sbin/my_init"]
-
-# Ensure UTF-8
+# add-apt-repository is broken with non-UTF-8 locales,
+# more details see https://github.com/oerdnj/deb.sury.org/issues/56
 RUN locale-gen en_US.UTF-8
 ENV LANG       en_US.UTF-8
 ENV LC_ALL     en_US.UTF-8
@@ -14,8 +13,8 @@ RUN apt-get update \
         python-software-properties --no-install-recommends \
  && add-apt-repository -y ppa:ondrej/php5-5.6 \
  && apt-get update \
- && DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes \
-        php5-cgi \ 
+ && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+        php5-cgi \
         php5-fpm \
         php5-curl \
         php5-mcrypt \

@@ -1,13 +1,11 @@
-FROM phusion/baseimage:0.9.18
+FROM packageman/base:1.0.0
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
-
-CMD ["/sbin/my_init"]
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
  && echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" > /etc/apt/sources.list.d/mongodb-org.list\
  && apt-get update \
- && apt-get install -y \
+ && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
         mongodb-org=3.2.7 \
         mongodb-org-server=3.2.7 \
         mongodb-org-shell=3.2.7 \

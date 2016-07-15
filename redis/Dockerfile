@@ -1,8 +1,6 @@
-FROM phusion/baseimage:0.9.18
+FROM packageman/base:1.0.0
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
-
-CMD ["/sbin/my_init"]
 
 RUN apt-get update && apt-get install -y redis-server --no-install-recommends
 
