@@ -12,7 +12,7 @@ services:
       - redis
       - mongodb
   php:
-    image: packageman/php:1.0.0
+    image: packageman/php:1.0.1
     ports:
       - "9000:9000"
     volumes:
