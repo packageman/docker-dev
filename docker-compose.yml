@@ -5,28 +5,35 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./src:/src
+      - ../src:/src
       - ./nginx/conf:/etc/nginx/conf.d
     links:
       - php
       - redis
       - mongodb
+    restart: always
   php:
-    image: packageman/php:1.0.1
-    ports:
-      - "9000:9000"
+    image: packageman/php-supervisor-node-sass:1.0.0
     volumes:
-      - ./src:/src
+      - ../src:/src
+      - ./php-supervisor-node-sass/supervisor/conf:/etc/supervisor/conf.d
+    restart: always
   redis:
     image: packageman/redis:1.0.0
     ports:
       - "6379:6379"
+    volumes:
+      - redis-data:/var/lib/redis
+    restart: always
   mongodb:
     image: packageman/mongodb:1.0.0
     ports:
       - "27017:27017"
     volumes:
       - mongodb-data:/var/lib/mongodb
+    restart: always
 volumes:
   mongodb-data:
+    driver: local
+  redis-data:
     driver: local
