@@ -16,6 +16,7 @@ RUN apt-get update \
  && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
         php5-cgi \
         php5-fpm \
+        php5-xdebug \
         php5-curl \
         php5-mcrypt \
         php5-gd \
