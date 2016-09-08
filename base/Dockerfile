@@ -4,7 +4,20 @@ MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
 ENV HOME /root
 
-RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
+ADD sources.list /etc/apt/sources.list
+
+RUN apt-get update \
+ && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+        python-software-properties \
+        build-essential \
+        wget \
+        curl \
+        git \
+        python-pip \
+        tcpdump --no-install-recommends
+
+RUN pip install j2cli \
+ && sed -i '/import sys/a\reload(sys)\nsys.setdefaultencoding("utf-8")' /usr/local/bin/j2
 
 CMD ["/sbin/my_init"]
 
