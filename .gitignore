@@ -1,1 +1,5 @@
 src/*
+php-supervisor-node-sass/envfiles/*
+php-supervisor-node-sass/templates/*
+environment-setup.md
+environment-setup.sh

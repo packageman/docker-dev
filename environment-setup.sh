@@ -61,4 +61,14 @@ ln -sf ../../validate-commit-msg modules/baomi/.git/hooks/commit-msg
 cd ../docker
 sudo docker-compose up -d
 
-sudo docker exec $(sudo docker ps | grep php-supervisor-node-sass | awk '{print $1}') /bin/bash -c "cd /src; ./initStage; npm install --registry=https://registry.npm.taobao.org; grunt cbuild"
+sudo docker exec $(sudo docker ps | grep php-supervisor-node-sass | awk '{print $1}') /bin/bash -c "cd /src \
+  && ./initStage \
+  && npm install --registry=https://registry.npm.taobao.org \
+  && grunt cbuild \
+  && ./yii baomi/data/populate dev"
+
+cd ../src
+# update permission of logs directory
+sudo chmod -R 777 backend/runtime/logs
+sudo chmod -R 777 frontend/runtime/logs
+sudo chmod -R 777 console/runtime/logs

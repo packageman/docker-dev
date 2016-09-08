@@ -1,4 +1,4 @@
-FROM packageman/base:1.0.0
+FROM packageman/base:1.0.1
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 

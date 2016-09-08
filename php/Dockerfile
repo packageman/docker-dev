@@ -1,4 +1,4 @@
-FROM packageman/base:1.0.0
+FROM packageman/base:1.0.1
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
@@ -8,15 +8,11 @@ RUN locale-gen en_US.UTF-8
 ENV LANG       en_US.UTF-8
 ENV LC_ALL     en_US.UTF-8
 
-RUN apt-get update \
- && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
-        python-software-properties --no-install-recommends \
- && add-apt-repository -y ppa:ondrej/php5-5.6 \
+RUN add-apt-repository -y ppa:ondrej/php5-5.6 \
  && apt-get update \
  && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
         php5-cgi \
         php5-fpm \
-        php5-xdebug \
         php5-curl \
         php5-mcrypt \
         php5-gd \
