@@ -2,6 +2,7 @@ version: '2'
 services:
   nginx:
     image: packageman/nginx:1.0.1
+    hostname: nginx
     ports:
       - "80:80"
     volumes:
@@ -14,12 +15,18 @@ services:
     restart: always
   php:
     image: packageman/php-supervisor-node-sass:1.0.1
+    hostname: php
     volumes:
+      - /etc/nginx/site-enabled:/etc/nginx/site-enabled
       - ../src:/src
+      - ../deploy:/deploy
       - ./php-supervisor-node-sass/supervisor/conf:/etc/supervisor/conf.d
+      - ./php-supervisor-node-sass/bin:/root/bin
+    env_file: ./php-supervisor-node-sass/envfiles/stage.env
     restart: always
   redis:
     image: packageman/redis:1.0.1
+    hostname: redis
     ports:
       - "6379:6379"
     volumes:
@@ -27,6 +34,7 @@ services:
     restart: always
   mongodb:
     image: packageman/mongodb:1.0.1
+    hostname: mongodb
     ports:
       - "27017:27017"
     volumes:

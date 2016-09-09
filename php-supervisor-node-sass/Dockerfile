@@ -27,8 +27,6 @@ RUN mkdir -p /etc/service/supervisor
 ADD supervisor/start.sh /etc/service/supervisor/run
 RUN chmod +x /etc/service/supervisor/run
 
-ADD templates /templates
-
 WORKDIR /src
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/node-v0.12.2-linux-x64.tar.gz
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
