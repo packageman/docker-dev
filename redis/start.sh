@@ -1,7 +1,12 @@
 #!/bin/bash
 
-if [ $PASS ]; then
-  echo "requirepass $PASS" >> /etc/redis/redis.conf
+set -e
+exec 2>&1
+
+configFile=/etc/redis/redis.conf
+
+if [ $REDIS_PASSWORD ]; then
+  echo "requirepass $REDIS_PASSWORD" >> $configFile
 fi
 
-service redis-server start
+/sbin/setuser redis redis-server $configFile
