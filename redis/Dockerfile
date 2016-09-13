@@ -15,6 +15,6 @@ RUN chmod +x /etc/service/redis/run
 
 EXPOSE 6379
 
-VOLUME ["/var/lib/redis", "/var/log/redis/redis.log"]
+VOLUME ["/var/lib/redis", "/var/log/redis"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
