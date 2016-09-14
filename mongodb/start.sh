@@ -8,10 +8,10 @@ configFile=/etc/mongod.conf
 userInitializedFile=/tmp/mongoUserInitialized
 
 function init_mongo_user {
-  /sbin/setuser mongodb mongod -f /etc/mongod.conf --noauth --pidfilepath $pidFile --fork
+  /sbin/setuser mongodb mongod -f $configFile --noauth --pidfilepath $pidFile --fork
 
   username=${MONGO_USERNAME:-"admin"}
-  password=${MONGO_USERNAME:-"Abc123__"}
+  password=${MONGO_PASSWORD:-"Abc123__"}
 
   echo "db.createUser({user: '${username}', pwd: '${password}', roles: ['root']})" | mongo admin
   echo "username: $username, password: $password, role: root" > $userInitializedFile
@@ -20,9 +20,8 @@ function init_mongo_user {
   rm $pidFile
 }
 
-
 if [[ $INIT_MONGO_USER ]] && [[ ! -f $userInitializedFile ]]; then
   init_mongo_user
 fi
 
-/sbin/setuser mongodb mongod -f /etc/mongod.conf
+/sbin/setuser mongodb mongod -f $configFile
