@@ -1,5 +1,5 @@
 src/*
-!src/test*
+!src/test_*
 php-supervisor-node-sass/envfiles/*
 php-supervisor-node-sass/templates/*
 environment-setup.md
