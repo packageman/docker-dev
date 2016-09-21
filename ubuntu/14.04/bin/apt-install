@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function apt-install() {
+    echo "Start to execute: apt-get update";
+    apt-get update;
+    echo "Start to execute: apt-get install -y $@";
+    DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -y "$@";
+    echo "Start to clean up...";
+    apt-get clean;
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*;
+}
+
+apt-install $@

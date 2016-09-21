@@ -1,7 +1,7 @@
 version: '2'
 services:
   nginx:
-    image: packageman/nginx:1.0.1
+    image: packageman/nginx:1.10.1
     hostname: nginx
     ports:
       - "80:80"
@@ -25,7 +25,7 @@ services:
     env_file: ./php-supervisor-node-sass/envfiles/stage.env
     restart: always
   redis:
-    image: packageman/redis:1.0.1
+    image: packageman/redis:3.0.7
     hostname: redis
     ports:
       - "6379:6379"
@@ -33,7 +33,7 @@ services:
       - redis-data:/var/lib/redis
     restart: always
   mongodb:
-    image: packageman/mongodb:1.0.1
+    image: packageman/mongodb:3.2.7
     hostname: mongodb
     ports:
       - "27017:27017"

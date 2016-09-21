@@ -1,24 +1,20 @@
-FROM packageman/base:1.0.1
+FROM packageman/ubuntu:14.04
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
 # add-apt-repository is broken with non-UTF-8 locales,
 # more details see https://github.com/oerdnj/deb.sury.org/issues/56
 RUN locale-gen en_US.UTF-8
-ENV LANG       en_US.UTF-8
-ENV LC_ALL     en_US.UTF-8
 
 RUN add-apt-repository -y ppa:ondrej/php5-5.6 \
- && apt-get update \
- && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
-        php5-cgi \
+ && apt-install php5-cgi \
         php5-fpm \
         php5-curl \
         php5-mcrypt \
         php5-gd \
         php5-dev \
         php5-redis \
-        php5-mongo --no-install-recommends
+        php5-mongo
 
 RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf \
  && sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini \
@@ -30,5 +26,3 @@ ADD start.sh /etc/service/php-fpm/run
 RUN chmod +x /etc/service/php-fpm/run
 
 EXPOSE 9000
-
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

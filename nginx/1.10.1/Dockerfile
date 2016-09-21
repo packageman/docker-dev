@@ -1,11 +1,11 @@
-FROM packageman/base:1.0.1
+FROM packageman/ubuntu:14.04
 
 MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
-RUN add-apt-repository ppa:nginx/stable \
- && apt-get update \
- && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
-        nginx --no-install-recommends
+ENV NGINX_VERSION ${NGINX_VERSION:-1.10.1-0+trusty0}
+
+RUN add-apt-repository -y ppa:nginx/stable \
+ && apt-install nginx=${NGINX_VERSION}
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
  && ln -sf /dev/stdout /var/log/nginx/access.log \
@@ -17,4 +17,4 @@ RUN chmod +x /etc/service/nginx/run
 
 EXPOSE 80 443
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+VOLUME /var/log/nginx
