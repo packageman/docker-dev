@@ -12,7 +12,7 @@ function init_mongo_user {
 
   while [[ -z $(netstat -luntp | grep 27017) ]]
   do
-    echo "sleep 1 seconds"
+    echo "sleep 1 second"
     sleep 1
   done
 
