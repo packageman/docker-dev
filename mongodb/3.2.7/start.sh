@@ -10,6 +10,12 @@ userInitializedFile=/tmp/mongoUserInitialized
 function init_mongo_user {
   /sbin/setuser mongodb mongod -f $configFile --noauth --pidfilepath $pidFile --fork
 
+  while [[ -z $(netstat -luntp | grep 27017) ]]
+  do
+    echo "sleep 1 seconds"
+    sleep 1
+  done
+
   username=${MONGO_USERNAME:-"admin"}
   password=${MONGO_PASSWORD:-"Abc123__"}
 
