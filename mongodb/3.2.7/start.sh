@@ -5,7 +5,8 @@ exec 2>&1
 
 pidFile=/tmp/mongod.pid
 configFile=/etc/mongod.conf
-userInitializedFile=/tmp/mongoUserInitialized
+dbFile=/var/lib/mongodb
+userInitializedFile="$dbFile"/mongoUserInitialized
 
 function init_mongo_user {
   /sbin/setuser mongodb mongod -f $configFile --noauth --pidfilepath $pidFile --fork
